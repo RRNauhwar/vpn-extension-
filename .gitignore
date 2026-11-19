@@ -2,5 +2,7 @@
 backend/.venv/
 backend/__pycache__/
 backend/*.db
+backend/.pytest_cache/
 extension/node_modules/
 extension/dist/
+.DS_Store
