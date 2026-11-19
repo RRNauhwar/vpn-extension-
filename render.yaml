@@ -35,6 +35,7 @@ services:
     name: globevpn-redis
     plan: starter
     maxmemoryPolicy: allkeys-lru
+    ipAllowList: []
 
 databases:
   - name: globevpn-postgres
