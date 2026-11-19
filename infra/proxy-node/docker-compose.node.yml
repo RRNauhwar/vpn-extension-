@@ -1,0 +1,19 @@
+# Production Single-Region TLS Proxy Exit Node
+# Deploy this on any VPS (US, UK, Germany, Singapore, etc.) with a real domain
+# and Let's Encrypt TLS certificate mounted at /etc/letsencrypt.
+
+services:
+  proxy-node:
+    build: .
+    restart: unless-stopped
+    environment:
+      PROXY_AUTH_USER: ${PROXY_AUTH_USER:?Set PROXY_AUTH_USER}
+      PROXY_AUTH_PASS: ${PROXY_AUTH_PASS:?Set PROXY_AUTH_PASS}
+      PROXY_PORT: 443
+      PROXY_TLS_ENABLED: "true"
+      TLS_CERT_PATH: /certs/fullchain.pem
+      TLS_KEY_PATH: /certs/privkey.pem
+    volumes:
+      - /etc/letsencrypt/live/${PROXY_DOMAIN:?Set PROXY_DOMAIN}:/certs:ro
+    ports:
+      - "443:443"
