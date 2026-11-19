@@ -1,6 +1,6 @@
-# Render.com Blueprint — Hosted GlobeVPN Control Plane (Independent of User's Computer)
+# Render.com Blueprint — Hosted GlobeVPN Control Plane (Free Tier, No Card Required)
 # Deploy via Render Dashboard -> Blueprints -> Connect Repository.
-# End users never run FastAPI, PostgreSQL, Redis, or Docker locally.
+# Note: Render Free web services spin down after 15 min of inactivity (first request wakes in ~30s).
 
 services:
   - type: web
@@ -8,7 +8,7 @@ services:
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
-    plan: starter
+    plan: free
     healthCheckPath: /health
     envVars:
       - key: APP_ENV
@@ -33,11 +33,11 @@ services:
 
   - type: keyvalue
     name: globevpn-redis
-    plan: starter
+    plan: free
     maxmemoryPolicy: allkeys-lru
     ipAllowList: []
 
 databases:
   - name: globevpn-postgres
-    plan: starter
+    plan: free
     postgresMajorVersion: "16"
